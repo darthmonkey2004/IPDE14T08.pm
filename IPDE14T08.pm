@@ -134,7 +134,7 @@ sub moveConDown
 	Debug("moveConDown");
 	my $self = shift;
 	my $params = shift;
-	my $cmd = "/form/setPTZCfg?command=5";
+	my $cmd = "/form/setPTZCfg?command=2";
 	$self->sendCmd( $cmd );
 	my $autostop = $self->getParam( $params, 'autostop', 0 );
 	if ( $autostop && $self->{Monitor}->{AutoStopTimeout} )
@@ -293,11 +293,68 @@ sub focusConFar
 	}
 }
 
+sub setFocusSpeed
+{
+	Debug( "Set Focus Speed (0 through 2)" );
+	my $self = shift;
+	my $params = shift;
+	my $cmd = "/form/setPTZCfg?command=40";	
+	$self->sendCmd( $cmd );
+}
+
+sub setTiltSpeed
+{
+	Debug( "Set Tilt Speed (0 through 7)" );
+	my $self = shift;
+	my $params = shift;
+	my $cmd = "/form/setPTZCfg?command=53";	
+	$self->sendCmd( $cmd );
+}
+
+sub setPanSpeed
+{
+	Debug( "Set Pan Speed (0 through 7)" );
+	my $self = shift;
+	my $params = shift;
+	my $cmd = "/form/setPTZCfg?command=52";	
+	$self->sendCmd( $cmd );
+}
+
 sub reboot
 {
 	Debug( "Camera Reboot" );
 	my $self = shift;
 	my $cmd = "/form/reboot?";
+	$self->sendCmd( $cmd );
+}
+
+sub presetSet
+{
+	Debug( "Set a new preset:" );
+	my $self = shift;
+	my $params = shift;
+	my $preset_number = $self->getParam( $params, 'preset', 1 );
+	my $cmd ="/form/presetSet?flag=3&presetNum=$preset_number";
+	$self->sendCmd( $cmd );
+}
+
+sub presetGoto
+{
+	Debug( "Set a new preset:" );
+	my $self = shift;
+	my $params = shift;
+	my $preset_number = $self->getParam( $params, 'preset', 1 );
+	my $cmd ="/form/presetSet?flag=4&presetNum=$preset_number";
+	$self->sendCmd( $cmd );
+}
+
+sub clearPreset
+{
+	Debug( "Delete a preset:" );
+	my $self = shift;
+	my $params = shift;
+	my $preset_number = $self->getParam( $params, 'preset', 1 );
+	my $cmd ="/form/presetSet?flag=5&presetNum=$preset_number";
 	$self->sendCmd( $cmd );
 }
 
