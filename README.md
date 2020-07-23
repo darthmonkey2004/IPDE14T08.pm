@@ -5,3 +5,5 @@ Then in the ZoneMinder web interface, in camera properties, under the control ta
 You'll have to create a new entry for it.
 You'll want to set this file name as the control protocol (without the .pm), and the method as 'cURL'.
 You'll also want to enable pan(continuous, speed 1-8), tilt(continous, speed 1-8), zoom(continous, speed 1-8), and iris(continous, speed 1-8). I haven't had the time to add much more than that, the basic ptz functionality... but will update when I do.
+
+7-22-20: Added presets and speed settings to ptz functionality. Continuous modes tested and working under ZoneMinder V1.34.16.
